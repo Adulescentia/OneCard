@@ -57,7 +57,12 @@ public class Card {
         printf("[%s] ",card.toString());
     }
 
-//    static void introducePlayerCard()
+    static void introducePlayerCard(ArrayList<Player> p, int num) {
+        for(int i = 0;i < num;i++){
+            printf("\np%d's cards : ",i+1);
+            for(Card j : p.get(i).deck) {Card.introduce(j);}
+        }
+    }
 
 
 }
