@@ -6,27 +6,24 @@ public class Main {
 
         Scanner input = new Scanner(System.in);
         println("Plz type here how many players are going to play this game.");
-        int numOfPlayer = input.nextInt();
+        int amountOfPlayer = input.nextInt(); // recieve - player amount
         input = new Scanner(System.in);
 
-        ArrayList<Card> field; //필드;
-        ArrayList<Card> deck = Card.makeDeck();//덱 생성
-        ArrayList<Player> players = Player.makePlayer(numOfPlayer,input); // 플레이어 생성
-        for(int i = 0;i < numOfPlayer; i++) {
-            for (int j = 0; j < 7; j++) {//플레이어에게 카드 지급(7장)
-                players.get(i).deck.add(deck.get(0));
-                deck.remove(0);
-            }
-        }
+        ArrayList<Card> field; // make - field(given cards);
+        ArrayList<Card> deck = Card.makeDeck(); // make - decks
+        ArrayList<Player> players = Player.makePlayer(amountOfPlayer,input); // make - players
 
-        do {//원카드 실행문
-            Card.introducePlayerCard(players,numOfPlayer);
-        }while(Gamerule.breakGame(players,numOfPlayer));
+        ArrayList<Player> players = Card.givePlayerCard(players,deck,amountOfPlayer).get(0); // shuffle - give result to players
+        ArrayList<card> deck = Card.givePlayerCard(players,deck,amountOfPlayer).get(1); // shuffle - give result to deck
 
+
+        /*will delete*/
+        /*from here*/
+        do { // execution statement - OneCard
+            Card.introducePlayerCard(players,amountOfPlayer); // intruduce - card to player
+        }while(Gamerule.breakGame(players,amountOfPlayer));
+        /*to here*/
 
     }
-//
-
-
 }
 
