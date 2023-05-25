@@ -14,7 +14,7 @@ public class Player {
         num = N;
     }
 
-    static ArrayList makePlayer(int num, Scanner input) { //플레이어 리스트 생성
+    static ArrayList<Player> makePlayer(int num, Scanner input) { //플레이어 리스트 생성
         ArrayList<Player> players = new ArrayList<>();
         for(int i = 0;i < num;i++){
             printf("What's p%d's name?\n",i+1); //이름 묻기

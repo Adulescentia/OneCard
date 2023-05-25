@@ -1,3 +1,5 @@
+import Util.Util;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -47,8 +49,7 @@ public class Card {
     static ArrayList<Card> makeDeck() {//덱 생성
         ArrayList<Card> deck = new ArrayList<>();
         for (int i = 0; i < 52; i++) {deck.add(new Card(i / 13, i % 13 + 1));}//카드 생성
-        deck.add(new Card(4, 13));//흑조커
-        deck.add(new Card(4, 14));//컬러조커
+        deck.addAll(Util.addAll(new Card(4, 13),new Card(4,14)));//add - joker
         Collections.shuffle(deck);
         return deck;
     }
@@ -64,13 +65,12 @@ public class Card {
         }
     }
 
-    static ArrayList<Object> givePlayerCard(ArrayList<Player> players, ArrayList<Card> deck, int num) {
+    static ArrayList<Player> givePlayerCard(ArrayList<Player> players, ArrayList<Card> deck, int num) {
         for (int i = 0; i < num*7;i++){
             players.get(i/7).deck.add(deck.get(0));
             deck.remove(i);
         }
-        ArrayList<Object> playersAndDeck= new ArrayList<>(Arrays.asList(players,deck));
-        return playersAndDeck;
+        return players;
     }
 
 

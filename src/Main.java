@@ -13,8 +13,8 @@ public class Main {
         ArrayList<Card> deck = Card.makeDeck(); // make - decks
         ArrayList<Player> players = Player.makePlayer(amountOfPlayer,input); // make - players
 
-        ArrayList<Player> players = Card.givePlayerCard(players,deck,amountOfPlayer).get(0); // shuffle - give result to players
-        ArrayList<card> deck = Card.givePlayerCard(players,deck,amountOfPlayer).get(1); // shuffle - give result to deck
+        players = Card.givePlayerCard(players,deck,amountOfPlayer); // shuffle - give result to players
+        for (int i=0; i<7*amountOfPlayer; i++) { deck.remove(i); } //delete - 7*amountOfPlayer cards in the deck
 
 
         /*will delete*/
