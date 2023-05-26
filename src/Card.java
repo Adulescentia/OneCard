@@ -46,24 +46,24 @@ public class Card {
         return this.getShape()+" "+this.getFace();
     }
     boolean compare (Card c1,Card c2) { return (c1.num == c2.num||c1.shape==c2.shape);}
-    static ArrayList<Card> makeDeck() {//덱 생성
-        ArrayList<Card> deck = new ArrayList<>();
-        for (int i = 0; i < 52; i++) {deck.add(new Card(i / 13, i % 13 + 1));}//카드 생성
-        deck.addAll(Util.addAll(new Card(4, 13),new Card(4,14)));//add - joker
-        Collections.shuffle(deck);
-        return deck;
-    }
-
-    static void introduce(Card card) {
-        printf("[%s] ",card.toString());
-    }
-
-    static void introducePlayerCard(ArrayList<Player> p, int num) {
-        for(int i = 0;i < num;i++){
-            printf("\np%d's cards : ",i+1);
-            for(Card j : p.get(i).deck) {Card.introduce(j);}
-        }
-    }
+//    static ArrayList<Card> makeDeck() {//덱 생성
+//        ArrayList<Card> deck = new ArrayList<>();
+//        for (int i = 0; i < 52; i++) {deck.add(new Card(i / 13, i % 13 + 1));}//카드 생성
+//        deck.addAll(Util.ListOf(new Card(4, 13),new Card(4,14)));//add - joker
+//        Collections.shuffle(deck);
+//        return deck;
+//    }
+//
+//    static void introduce(Card card) {
+//        printf("[%s] ",card.toString());
+//    }
+//
+//    static void introducePlayerCard(ArrayList<Player> p, int num) {
+//        for(int i = 0;i < num;i++){
+//            printf("\np%d's cards : ",i+1);
+//            for(Card j : p.get(i).deck) {Card.introduce(j);}
+//        }
+//    }
 
     static ArrayList<Player> givePlayerCard(ArrayList<Player> players, ArrayList<Card> deck, int num) {
         for (int i = 0; i < num*7;i++){
