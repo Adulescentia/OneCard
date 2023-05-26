@@ -10,7 +10,5 @@ public class Util {
     public static void println(Object o){ out.println(o); }
     public static void print(Object o){ out.print(o); }
 
-    public static <T> ArrayList<T> addAll (T... elements){
-        return new ArrayList<T>(Arrays.asList(elements));
-    }
+    public static <T> ArrayList<T> ListOf (T... elements){return new ArrayList<T>(Arrays.asList(elements));}
 }
