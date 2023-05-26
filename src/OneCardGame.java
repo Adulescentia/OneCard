@@ -44,13 +44,10 @@ public class OneCardGame {
         Collections.shuffle(this.deck); //shuffle - deck
     }
 
-    static void introduce(Card card) {
-        printf("[%s] ",card.toString());
-    }
     void introducePlayerCard() {
         for(int i = 0;i < amountOfPlayers;i++){
             printf("\np%d's cards : ",i+1);
-            for(Card j : players.get(i).deck) {introduce(j);}
+            for(Card j : players.get(i).deck) {printf("[%s] ",j.toString());}
         }
     }
     ArrayList<Card> drawAmount (int amount){

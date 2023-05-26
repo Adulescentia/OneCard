@@ -18,7 +18,8 @@ public class Card {
             case 11 -> "J";
             case 12 -> "Q";
             case 13 -> "K";
-            case 14 -> "Joker";
+            case 15 -> "G";
+            case 16 -> "C";
             default -> String.valueOf(this.num);
         };
     }
@@ -32,46 +33,11 @@ public class Card {
             default -> throw new IllegalStateException("Unexpected value: " + shape);
         };
     }
-//    int Ability () {//카드 능력,받는 카드 반환
-//        return switch (this.num) {
-//            case 1 -> 3;
-//            case 2 -> 2;
-//            case 14 -> 5;
-//            case 15 -> 7;
-//            default -> 0;
-//        };
-//    }
     @Override
     public String toString() {
         return this.getShape()+" "+this.getFace();
     }
+
     boolean compare (Card c1,Card c2) { return (c1.num == c2.num||c1.shape==c2.shape);}
-//    static ArrayList<Card> makeDeck() {//덱 생성
-//        ArrayList<Card> deck = new ArrayList<>();
-//        for (int i = 0; i < 52; i++) {deck.add(new Card(i / 13, i % 13 + 1));}//카드 생성
-//        deck.addAll(Util.ListOf(new Card(4, 13),new Card(4,14)));//add - joker
-//        Collections.shuffle(deck);
-//        return deck;
-//    }
-//
-//    static void introduce(Card card) {
-//        printf("[%s] ",card.toString());
-//    }
-//
-//    static void introducePlayerCard(ArrayList<Player> p, int num) {
-//        for(int i = 0;i < num;i++){
-//            printf("\np%d's cards : ",i+1);
-//            for(Card j : p.get(i).deck) {Card.introduce(j);}
-//        }
-//    }
-
-    static ArrayList<Player> givePlayerCard(ArrayList<Player> players, ArrayList<Card> deck, int num) {
-        for (int i = 0; i < num*7;i++){
-            players.get(i/7).deck.add(deck.get(0));
-            deck.remove(i);
-        }
-        return players;
-    }
-
 
 }
