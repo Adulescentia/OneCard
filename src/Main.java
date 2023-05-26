@@ -1,29 +1,35 @@
 import static  Util.Util.*;
 import java.util.*;
+
+import static java.lang.System.in;
 import static java.lang.System.out;
 public class Main {
     public static void main(String[] args) {
 
+        /*This is just a banner,dear. This is just a banner,dear. This is just a banner,dear. This is just a banner,dear. This is just a banner,dear.*/
+        /*vars*/
+        String name;
+        ArrayList<String> playersName = new ArrayList<>();
         Scanner input = new Scanner(System.in);
+        OneCardGame onecard = new OneCardGame();
+
+        /*This is just a banner,dear. This is just a banner,dear. This is just a banner,dear. This is just a banner,dear. This is just a banner,dear.*/
+        /*inputs*/
+
         println("Plz type here how many players are going to play this game.");
+        int amountOfPlayers = input.nextInt();
+        input = new Scanner(System.in);
+        for(int i = 0; i < amountOfPlayers; i++) {
+            printf("What's p%d's name?\n",i+1); //이름 묻기
+            name = input.nextLine();
+            playersName.add(name);
+            printf("ok, hello %s.\n\n",name);
+        }
 
-//        int amountOfPlayer = input.nextInt(); // recieve - player amount
-//        input = new Scanner(System.in);
-//
-//        ArrayList<Card> field; // make - field(given cards);
-//        ArrayList<Card> deck = Card.makeDeck(); // make - decks
-//        ArrayList<Player> players = Player.makePlayer(amountOfPlayer,input); // make - players
-//
-//        players = Card.givePlayerCard(players,deck,amountOfPlayer); // shuffle - give result to players
-//        for (int i=0; i<7*amountOfPlayer; i++) { deck.remove(i); } //delete - 7*amountOfPlayer cards in the deck
+        /*This is just a banner,dear. This is just a banner,dear. This is just a banner,dear. This is just a banner,dear. This is just a banner,dear.*/
+        /*methods*/
+        onecard.prepare(amountOfPlayers, playersName);
 
-
-        /*will delete*/
-        /*from here*/
-        do { // execution statement - OneCard
-            Card.introducePlayerCard(players,amountOfPlayer); // intruduce - card to player
-        }while(Gamerule.breakGame(players,amountOfPlayer));
-        /*to here*/
 
     }
 }
