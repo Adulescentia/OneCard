@@ -1,17 +1,16 @@
 import Util.Util;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
-import static Util.Util.printf;
-import static Util.Util.println;
+import static Util.Util.*;
 
 public class OneCardGame {
 
     /*This is just a banner,dear. This is just a banner,dear. This is just a banner,dear. This is just a banner,dear. This is just a banner,dear.*/
     int amountOfPlayers;
+    int turn = -1;
+    Card nowcard = new Card(0,0);
+    ArrayList<Card> canDrawCard = new ArrayList<>();
     ArrayList<Card> field = new ArrayList<>(); // make - field(given cards);
     ArrayList<Card> deck = new ArrayList<>(); // make - decks
     ArrayList<Player> players = new ArrayList<>(); // make - players
@@ -22,20 +21,24 @@ public class OneCardGame {
 
         amountOfPlayers = amount;
         for(int i = 0;i < amountOfPlayers;i++){
-            printf("What's p%d's name?\n",i+1); //이름 묻기
             players.add(new Player(playerName.get(i),i));
-            printf("ok, hello %s.\n",players.get(i).name);
         }
         makeDeck();
         for (Player player : players) { player.deck.addAll(drawAmount(7)); }
         introducePlayerCard();
+        printf("\n\nNow on field : [%s]\n",deck.get(0).toString());
+        field.add(deck.get(0));
+        nowcard = deck.get(0);
+        deck.remove(0);
     }
 
-
-
-
-
-
+    void progressTurn(int cardNumber, int amountOfDrawCards) {
+        if(canPlayerDrawCard(getWhichPlayerTurnNow())) {
+            showPlayerCardTheyCanDraw(getWhichPlayerTurnNow());
+            drawCards(cardNumber,amountOfDrawCards);
+        }
+//        progressTurn();
+    }
 
     /*This is just a banner,dear. This is just a banner,dear. This is just a banner,dear. This is just a banner,dear. This is just a banner,dear.*/
     void makeDeck() {//덱 생성
@@ -46,7 +49,7 @@ public class OneCardGame {
 
     void introducePlayerCard() {
         for(int i = 0;i < amountOfPlayers;i++){
-            printf("\np%d's cards : ",i+1);
+            printf("\n%s's cards : ",players.get(i).name);
             for(Card j : players.get(i).deck) {printf("[%s] ",j.toString());}
         }
     }
@@ -57,5 +60,29 @@ public class OneCardGame {
             deck.remove(0);
         }
         return returnList;
+    }
+    int getWhichPlayerTurnNow () {
+        turn++;
+        return (turn%(amountOfPlayers*2)/2);
+    }
+    boolean canPlayerDrawCard (int playerNumber) {
+        for (Card card : players.get(playerNumber).deck) {
+            if (Objects.equals(card.getShape(), nowcard.getShape()) || Objects.equals(card.getFace(), nowcard.getFace())) { return true; }
+        }
+        return false;
+    }
+    void showPlayerCardTheyCanDraw (int playerNumber) {
+        printf("%s, You can draw   ",players.get(playerNumber).name);
+        for (Card card : players.get(playerNumber).deck) {
+            if (Objects.equals(card.getShape(), nowcard.getShape()) || Objects.equals(card.getFace(), nowcard.getFace())) {
+                printf("[%s]",card.toString());
+                canDrawCard.add(card);
+            }
+        }
+    }
+    void drawCards (int cardNumber, int amountOfCards ){
+        for(Card card : canDrawCard) {
+
+        }
     }
 }
