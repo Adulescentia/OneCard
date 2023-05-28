@@ -13,7 +13,7 @@ public class Card {
         num = n;
     }
     String getFace () {//카드 종류 확인용,문자열 반환
-        return switch (this.num) {
+        return switch (num) {
             case 1  -> "A";
             case 11 -> "J";
             case 12 -> "Q";
@@ -24,7 +24,7 @@ public class Card {
         };
     }
     String getShape () {//카드 문양 확인용,문자열 반환
-        return switch (this.shape) {
+        return switch (shape) {
             case 0 -> "S";
             case 1 -> "D";
             case 2 -> "H";
@@ -35,7 +35,7 @@ public class Card {
     }
     @Override
     public String toString() {
-        return this.getShape()+" "+this.getFace();
+        return "["+getShape()+" "+getFace()+"]";
     }
 
     boolean compare (Card c1,Card c2) { return (c1.num == c2.num||c1.shape==c2.shape);}
