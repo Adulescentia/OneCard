@@ -29,7 +29,7 @@ public class Main {
         /*This is just a banner,dear. This is just a banner,dear. This is just a banner,dear. This is just a banner,dear. This is just a banner,dear.*/
         /*methods*/
         onecard.prepare(amountOfPlayers, playersName);
-        onecard.progressTurn();
+        onecard.progressTurn(input);
 
 
     }

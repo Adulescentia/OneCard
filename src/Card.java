@@ -39,5 +39,13 @@ public class Card {
     }
 
     boolean compare (Card c1,Card c2) { return (c1.num == c2.num||c1.shape==c2.shape);}
+    static boolean compareNumberEveryCard (ArrayList<Card> cards,Card field) {
+        for (Card card : cards) {
+            if(card.num == field.num){
+                return true;
+            }
+        }
+        return false;
+    }
 
 }
