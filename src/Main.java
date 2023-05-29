@@ -11,7 +11,7 @@ public class Main {
         String name;
         ArrayList<String> playersName = new ArrayList<>();
         Scanner input = new Scanner(System.in);
-        OneCardGame onecard = new OneCardGame();
+        OneCardGame oneCard = new OneCardGame();
 
         /*This is just a banner,dear. This is just a banner,dear. This is just a banner,dear. This is just a banner,dear. This is just a banner,dear.*/
         /*inputs*/
@@ -28,8 +28,8 @@ public class Main {
 
         /*This is just a banner,dear. This is just a banner,dear. This is just a banner,dear. This is just a banner,dear. This is just a banner,dear.*/
         /*methods*/
-        onecard.prepare(amountOfPlayers, playersName);
-        onecard.progressTurn(input);
+        oneCard.prepare(amountOfPlayers, playersName);
+        oneCard.progressTurn(input);
 
 
     }

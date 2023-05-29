@@ -8,9 +8,9 @@ public class OneCardGame {
 
     /*This is just a banner,dear. This is just a banner,dear. This is just a banner,dear. This is just a banner,dear. This is just a banner,dear.*/
     int amountOfPlayers;
-    int turn = -1;
-
-    Card nowcard = new Card(0,0);
+    static int turn = -1;
+    int turnDirection = 1;
+    Card nowCard = new Card(0,0);
     ArrayList<Card> canDrawSameNumberCard = new ArrayList<>();
     ArrayList<Card> canDrawCard = new ArrayList<>();
     ArrayList<Card> field = new ArrayList<>(); // make - field(given cards);
@@ -30,35 +30,39 @@ public class OneCardGame {
         introducePlayerCard();
         printf("\n\nNow on field : %s\n",deck.get(0).toString());
         field.add(deck.get(0));
-        nowcard = deck.get(0);
+        nowCard = field.get(0);
         deck.remove(0);
     }
 
     void progressTurn(Scanner input) {
+        nowCard = field.get(0);
         turn = getTurn();
         println("\n ------------------------------------------------------ \n");
         printf("%s's turn.\n",players.get(turn).name);
+        introduceSpecificPlayerCard(turn);
         if(canPlayerDrawCard(turn)) {
-            print("You can draw   ");
+            print("\nYou can draw   ");
             showCardCanDraw(turn);
-            if(canDrawCard.size() > 0) {
-                println("\nPlz type here what number of card you'd like to draw.\nIf you want to get a new card, type 0.");
-                drawCard(input.nextInt()-1,turn);
-                if(Card.compareNumberEveryCard(canDrawCard,field.get(0))){
-                    while (true) {
-                        printf("You have more %d, so You can draw more.\nIf you draw one more, type 0. Else, type 1\n",field.get(0).num);
-                        if(input.nextInt() == 0){
-                            print("You can draw   ");
-                            showSameNumberCardCanDraw(turn);
-                            println("Plz type here what number of card you'd like to draw.");
-                        } else {
-                            break;
-                        }
+            println("\nPlz type here what number of card you'd like to draw.\nIf you want to get a new card, type 0.");
+            drawCard(input.nextInt()-1,turn);
+            Card.kingAbility(nowcard,this);
+            if(Card.compareNumberEveryCard(canDrawCard,nowcard)){
+                while (true) {
+                    printf("You have more %d, so You can draw more.\nIf you draw one more, type 0. Else, type 1\n",field.get(0).num);
+                    if(input.nextInt() == 0){
+                        print("You can draw   ");
+                        showSameNumberCardCanDraw(turn);
+                        println("Plz type here what number of card you'd like to draw.");
+                    } else {
+                        break;
                     }
                 }
             }
+        } else {
+            println("You don't have card can draw. so, you need to take a card.");
+            drawCard(input.nextInt()-1,turn);
         }
-//        progressTurn();
+        progressTurn(input);
     }
 
     /*This is just a banner,dear. This is just a banner,dear. This is just a banner,dear. This is just a banner,dear. This is just a banner,dear.*/
@@ -74,7 +78,7 @@ public class OneCardGame {
             for(Card j : players.get(i).deck) {printf("%s ",j);}
         }
     }
-    void introduceSpecifficPlayerCard(int playerNumber) {
+    void introduceSpecificPlayerCard(int playerNumber) {
             printf("\n%s's cards : ",players.get(playerNumber).name);
             for(Card j : players.get(playerNumber).deck) {printf("%s ",j.toString());}
     }
@@ -87,12 +91,12 @@ public class OneCardGame {
         return returnList;
     }
     int getTurn () {
-        turn++;
+        turn+=Card.queenAbility(nowCard,turnDirection);
         return (turn%amountOfPlayers);
     }
     boolean canPlayerDrawCard (int playerNumber) {
         for (Card card : players.get(playerNumber).deck) {
-            if (Objects.equals(card.getShape(), nowcard.getShape()) || Objects.equals(card.getFace(), nowcard.getFace())) { return true; }
+            if (Objects.equals(card.getShape(), nowCard.getShape()) || Objects.equals(card.getFace(), nowCard.getFace())) { return true; }
         }
         return false;
     }
@@ -109,22 +113,22 @@ public class OneCardGame {
         if (cardNumber == -1) {
             pickNewCard(turn);
         } else if (cardNumber >= 0) {
-            printf("Now, card on field is %s",players.get(turn).deck.get(cardNumber).toString());
-            field.add(players.get(turn).deck.get(cardNumber));
+            printf("Now, card on field is %s",players.get(turn).deck.get(cardNumber));
+            field.add(0,players.get(turn).deck.get(cardNumber));
             players.get(turn).deck.remove(cardNumber);
-            introduceSpecifficPlayerCard(turn);
+            introduceSpecificPlayerCard(turn);
         } else {
             print("fuck you");
         }
 
     }
-    void drawSameNumberCard (int cardNumber, int turn) {
+    void drawSameNumberCard (int cardNumber, int  turn) {
 
     }
     void pickNewCard (int playerNumber) {
         players.get(playerNumber).deck.add(deck.get(0));
         deck.remove(0);
-        introduceSpecifficPlayerCard(playerNumber);
+        introduceSpecificPlayerCard(playerNumber);
     }
     void showSameNumberCardCanDraw (int playerNumber) {
         for (Card card : players.get(playerNumber).deck) {

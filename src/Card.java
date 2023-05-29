@@ -1,13 +1,10 @@
-import Util.Util;
-
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import static  Util.Util.*;
+import java.util.Scanner;
+
 public class Card {
     int shape;//문양
     int num;//숫자
-
+    static Scanner input = new Scanner(System.in);
     Card(int s,int n) {//생성자
         shape = s;
         num = n;
@@ -20,7 +17,7 @@ public class Card {
             case 13 -> "K";
             case 15 -> "G";
             case 16 -> "C";
-            default -> String.valueOf(this.num);
+            default -> String.valueOf(num);
         };
     }
     String getShape () {//카드 문양 확인용,문자열 반환
@@ -32,6 +29,21 @@ public class Card {
             case 4 -> "J";
             default -> throw new IllegalStateException("Unexpected value: " + shape);
         };
+    }
+    int attackAmount() {
+        return switch (num) {
+            case 1 -> 3;
+            case 2 -> 2;
+            case 15 -> 5;
+            case 16 -> 7;
+            default -> 0;
+        };
+    }
+    static int queenAbility(Card nowCard, int turnDirection) {
+        if (nowCard.num == 12) { return -turnDirection; } else { return turnDirection; }
+    }
+    static void kingAbility(Card nowCard,OneCardGame oneCard) {
+        if (nowCard.num == 13) {oneCard.turn -= 1;}
     }
     @Override
     public String toString() {
