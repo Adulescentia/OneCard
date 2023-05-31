@@ -39,12 +39,7 @@ public class Card {
             default -> 0;
         };
     }
-    static int queenAbility(Card nowCard, int turnDirection) {
-        if (nowCard.num == 12) { return -turnDirection; } else { return turnDirection; }
-    }
-    static void kingAbility(Card nowCard,OneCardGame oneCard) {
-        if (nowCard.num == 13) {oneCard.turn -= 1;}
-    }
+
     @Override
     public String toString() {
         return "["+getShape()+" "+getFace()+"]";

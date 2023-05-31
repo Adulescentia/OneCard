@@ -45,10 +45,10 @@ public class OneCardGame {
             showCardCanDraw(turn);
             println("\nPlz type here what number of card you'd like to draw.\nIf you want to get a new card, type 0.");
             drawCard(input.nextInt()-1,turn);
-            Card.kingAbility(nowcard,this);
-            if(Card.compareNumberEveryCard(canDrawCard,nowcard)){
+            activeAbility();
+            if(Card.compareNumberEveryCard(canDrawCard,nowCard)){
                 while (true) {
-                    printf("You have more %d, so You can draw more.\nIf you draw one more, type 0. Else, type 1\n",field.get(0).num);
+                    printf("You have more %d, so You can draw more.\nIf you draw one more, type 0. Else, type 1\n",field.get(0).getFace());
                     if(input.nextInt() == 0){
                         print("You can draw   ");
                         showSameNumberCardCanDraw(turn);
@@ -59,8 +59,8 @@ public class OneCardGame {
                 }
             }
         } else {
-            println("You don't have card can draw. so, you need to take a card.");
-            drawCard(input.nextInt()-1,turn);
+            println("You don't have card to draw. so, you need to take a card.");
+            pickNewCard(turn);
         }
         progressTurn(input);
     }
@@ -91,7 +91,7 @@ public class OneCardGame {
         return returnList;
     }
     int getTurn () {
-        turn+=Card.queenAbility(nowCard,turnDirection);
+        turn+=turnDirection;
         return (turn%amountOfPlayers);
     }
     boolean canPlayerDrawCard (int playerNumber) {
@@ -103,7 +103,7 @@ public class OneCardGame {
     void showCardCanDraw (int playerNumber) {
 
         for (Card card : players.get(playerNumber).deck) {
-            if (Objects.equals(card.getShape(), nowcard.getShape()) || Objects.equals(card.getFace(), nowcard.getFace())) {
+            if (Objects.equals(card.getShape(), nowCard.getShape()) || Objects.equals(card.getFace(), nowCard.getFace())) {
                 printf("%s ",card.toString());
                 canDrawCard.add(card);
             }
@@ -132,10 +132,29 @@ public class OneCardGame {
     }
     void showSameNumberCardCanDraw (int playerNumber) {
         for (Card card : players.get(playerNumber).deck) {
-            if (Objects.equals(card.getFace(), nowcard.getFace())) {
+            if (Objects.equals(card.getFace(), nowCard.getFace())) {
                 print(card);
                 canDrawSameNumberCard.add(card);
             }
         }
+    }
+    void activeAbility() {
+        switch (nowCard.shape) {
+            case 11:
+                break;
+            case 12:
+                queenAbility();
+                break;
+            case 13:
+                kingAbility();
+            default:
+                break;
+        }
+    }
+    void queenAbility() {
+        if (nowCard.num == 12) { turnDirection --; }
+    }
+    void kingAbility() {
+        if (nowCard.num == 13) {turn --;}
     }
 }
